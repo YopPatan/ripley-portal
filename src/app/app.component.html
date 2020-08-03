@@ -1,6 +1,7 @@
 <mat-toolbar color="primary" class="ripley-header">
   <mat-toolbar-row>
-    <span>Ripley</span>
+    <span style="width: 100%">Ripley</span>
+    <button *ngIf="isActive()" (click)="logout()">Cerrar sesión</button>
   </mat-toolbar-row>
 </mat-toolbar>
 

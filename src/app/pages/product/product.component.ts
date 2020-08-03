@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GalleryItem, ImageItem} from '@ngx-gallery/core';
-import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ProductService} from '../../services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -14,17 +14,21 @@ export class ProductComponent implements OnInit {
   product: any;
 
   constructor(
-    private http: HttpClient,
+    public router: Router,
+    private productService: ProductService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const sku = this.route.snapshot.paramMap.get('sku');
-    this.http.get('http://localhost:3000/' + sku).subscribe( response => {
-      console.log('response', response);
+    this.productService.getProduct(sku).then(response => {
       this.product = response;
       this.images = this.product.images.map(item => {
-        return new ImageItem( { src: item, thumb: item } );
+        return new ImageItem({src: item, thumb: item});
       });
+    }).catch(error => {
+      if (error.status === 403 || error.status === 400) {
+        this.router.navigate(['/login']);
+      }
     });
   }
 

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ProductComponent} from './page/product/product.component';
-import {CatalogComponent} from './page/catalog/catalog.component';
-import {LoginComponent} from './page/login/login.component';
+import {ProductComponent} from './pages/product/product.component';
+import {CatalogComponent} from './pages/catalog/catalog.component';
+import {LoginComponent} from './pages/login/login.component';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
     component: ProductComponent
   },
   {
-    path: 'catalog',
+    path: '',
     component: CatalogComponent
   },
   {
